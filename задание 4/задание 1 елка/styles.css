@@ -1,0 +1,196 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #1a1a1a;
+}
+
+.tree {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Звезда на верхушке */
+.star {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 30px solid gold;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.star:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 30px solid gold;
+    top: 10px;
+    left: -15px;
+}
+
+/* Ветки ёлки */
+.branch {
+    width: 0;
+    height: 0;
+    border-left: solid transparent;
+    border-right: solid transparent;
+    border-bottom: solid #2d5a27;
+    position: relative;
+    margin-bottom: -20px;
+}
+
+.branch-1 {
+    border-left-width: 30px;
+    border-right-width: 30px;
+    border-bottom-width: 50px;
+}
+
+.branch-2 {
+    border-left-width: 50px;
+    border-right-width: 50px;
+    border-bottom-width: 70px;
+}
+
+.branch-3 {
+    border-left-width: 70px;
+    border-right-width: 70px;
+    border-bottom-width: 90px;
+}
+
+.branch-4 {
+    border-left-width: 90px;
+    border-right-width: 90px;
+    border-bottom-width: 110px;
+}
+
+/* Ствол */
+.trunk {
+    width: 40px;
+    height: 60px;
+    background-color: #5c4033;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+/* Шарики на ёлке */
+.ornament {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #ff0000;
+}
+
+/* Позиционирование шариков для каждого яруса */
+.branch-1 .ornament:nth-child(1) {
+    left: -10px;
+    top: 20px;
+    background-color: #ff69b4;
+}
+
+.branch-1 .ornament:nth-child(2) {
+    right: -10px;
+    top: 20px;
+    background-color: #ffd700;
+}
+
+.branch-2 .ornament:nth-child(1) {
+    left: -20px;
+    top: 30px;
+    background-color: #ff0000;
+}
+
+.branch-2 .ornament:nth-child(2) {
+    right: -20px;
+    top: 30px;
+    background-color: #4169e1;
+}
+
+.branch-2 .ornament:nth-child(3) {
+    left: 0;
+    top: 40px;
+    background-color: #ffd700;
+}
+
+.branch-3 .ornament:nth-child(1) {
+    left: -30px;
+    top: 40px;
+    background-color: #ff69b4;
+}
+
+.branch-3 .ornament:nth-child(2) {
+    right: -30px;
+    top: 40px;
+    background-color: #ff0000;
+}
+
+.branch-3 .ornament:nth-child(3) {
+    left: 0;
+    top: 60px;
+    background-color: #4169e1;
+}
+
+.branch-3 .ornament:nth-child(4) {
+    right: 0;
+    top: 60px;
+    background-color: #ffd700;
+}
+
+.branch-4 .ornament:nth-child(1) {
+    left: -40px;
+    top: 50px;
+    background-color: #ff0000;
+}
+
+.branch-4 .ornament:nth-child(2) {
+    right: -40px;
+    top: 50px;
+    background-color: #ff69b4;
+}
+
+.branch-4 .ornament:nth-child(3) {
+    left: 0;
+    top: 70px;
+    background-color: #ffd700;
+}
+
+.branch-4 .ornament:nth-child(4) {
+    right: 0;
+    top: 70px;
+    background-color: #4169e1;
+}
+
+.branch-4 .ornament:nth-child(5) {
+    left: -20px;
+    top: 90px;
+    background-color: #ff0000;
+}
+
+/* Анимация мерцания шариков */
+@keyframes twinkle {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+.ornament {
+    animation: twinkle 2s infinite;
+}
+
+/* Разное время анимации для разных шариков */
+.ornament:nth-child(2n) {
+    animation-delay: 0.5s;
+}
+
+.ornament:nth-child(3n) {
+    animation-delay: 1s;
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор чисел Фибоначчи</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 8px;
+            width: 100px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .sequence {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Калькулятор чисел Фибоначчи</h1>
+        <div class="input-group">
+            <input type="number" id="numberInput" min="1" placeholder="Введите N">
+            <button onclick="calculateFibonacci()">Вычислить</button>
+        </div>
+        <div id="result"></div>
+        <div class="sequence">
+            Последовательность Фибоначчи: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
+        </div>
+    </div>
+
+    <script>
+        function fibonacci(n) {
+            if (n <= 0) {
+                return "N должно быть положительным числом";
+            }
+            if (n == 1 || n == 2) {
+                return 1;
+            }
+
+            let prev = 1;
+            let current = 1;
+
+            for (let i = 3; i <= n; i++) {
+                [prev, current] = [current, prev + current];
+            }
+
+            return current;
+        }
+
+        function calculateFibonacci() {
+            const input = document.getElementById('numberInput');
+            const resultDiv = document.getElementById('result');
+            const n = parseInt(input.value);
+
+            if (isNaN(n)) {
+                resultDiv.innerHTML = "Пожалуйста, введите число";
+                return;
+            }
+
+            if (n > 50) {
+                resultDiv.innerHTML = "Введите число не больше 50";
+                return;
+            }
+
+            const result = fibonacci(n);
+            resultDiv.innerHTML = `${n}-е число Фибоначчи: <strong>${result}</strong>`;
+        }
+
+        // Добавляем обработчик клавиши Enter
+        document.getElementById('numberInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateFibonacci();
+            }
+        });
+    </script>
+</body>
+</html>

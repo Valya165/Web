@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .order-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"],
+        .checkbox-group input[type="radio"] {
+            width: auto;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        #orderResult {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 4px;
+            display: none;
+        }
+
+        /* Десктопная версия (больше 768px) */
+        @media (min-width: 768px) {
+            label {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            input::placeholder,
+            textarea::placeholder {
+                opacity: 0.5;
+            }
+        }
+
+        /* Мобильная версия (меньше 768px) */
+        @media (max-width: 767px) {
+            label:not(.checkbox-group label) {
+                display: none;
+            }
+
+            input::placeholder,
+            textarea::placeholder {
+                opacity: 1;
+            }
+
+            .order-form {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form class="order-form" id="orderForm">
+        <h2>Оформление заказа</h2>
+
+        <div class="form-group">
+            <label for="fullname">ФИО</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Введите ФИО" required>
+            <span class="error-message" id="fullnameError">Пожалуйста, введите ФИО</span>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Введите email" required>
+            <span class="error-message" id="emailError">Введите корректный email</span>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Телефон</label>
+            <input type="tel" id="phone" name="phone" placeholder="Введите телефон в формате +7XXXXXXXXXX" required>
+            <span class="error-message" id="phoneError">Введите телефон в формате +7XXXXXXXXXX</span>
+        </div>
+
+        <div class="form-group">
+            <label for="size">Размер</label>
+            <select id="size" name="size" required>
+                <option value="">Выберите размер</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+            </select>
+            <span class="error-message" id="sizeError">Выберите размер</span>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Количество</label>
+            <input type="number" id="quantity" name="quantity" min="1" max="10" placeholder="Укажите количество" required>
+            <span class="error-message" id="quantityError">Укажите количество от 1 до 10</span>
+        </div>
+
+        <fieldset>
+            <legend>Способ доставки</legend>
+            <div class="checkbox-group">
+                <input type="radio" id="delivery" name="delivery-type" value="delivery" required>
+                <label for="delivery">Доставка курьером</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="radio" id="pickup" name="delivery-type" value="pickup">
+                <label for="pickup">Самовывоз</label>
+            </div>
+            <span class="error-message" id="deliveryError">Выберите способ доставки</span>
+        </fieldset>
+
+        <div class="form-group" id="addressGroup">
+            <label for="address">Адрес доставки</label>
+            <textarea id="address" name="address" placeholder="Введите адрес доставки" rows="3"></textarea>
+            <span class="error-message" id="addressError">Введите адрес доставки</span>
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="agreement" name="agreement" required>
+            <label for="agreement">Согласен с условиями доставки</label>
+            <span class="error-message" id="agreementError">Необходимо согласиться с условиями</span>
+        </div>
+
+        <button type="submit">Оформить заказ</button>
+    </form>
+
+    <div id="orderResult"></div>
+
+    <script>
+        const form = document.getElementById('orderForm');
+        const addressGroup = document.getElementById('addressGroup');
+        const orderResult = document.getElementById('orderResult');
+
+        // Управление отображением поля адреса
+        document.querySelectorAll('input[name="delivery-type"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                addressGroup.style.display = this.value === 'delivery' ? 'block' : 'none';
+                document.getElementById('address').required = this.value === 'delivery';
+            });
+        });
+
+        // Изначально скрываем поле адреса
+        addressGroup.style.display = 'none';
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Сброс ошибок
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.style.display = 'none';
+            });
+
+            let hasErrors = false;
+            const formData = new FormData(this);
+
+            // Валидация ФИО
+            if (!formData.get('fullname').trim()) {
+                document.getElementById('fullnameError').style.display = 'block';
+                hasErrors = true;
+            }
+
+            // Валидация email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(formData.get('email'))) {
+                document.getElementById('emailError').style.display = 'block';
+                hasErrors = true;
+            }
+
+            // Валидация телефона
+            const phoneRegex = /^\+7\d{10}$/;
+            if (!phoneRegex.test(formData.get('phone'))) {
+                document.getElementById('phoneError').style.display = 'block';
+                hasErrors = true;
+            }
+
+            // Валидация размера
+            if (!formData.get('size')) {
+                document.getElementById('sizeError').style.display = 'block';
+                hasErrors = true;
+            }
+
+            // Валидация количества
+            const quantity = parseInt(formData.get('quantity'));
+            if (isNaN(quantity) || quantity < 1 || quantity > 10) {
+                document.getElementById('quantityError').style.display = 'block';
+                hasErrors = true;
+            }
+
+            // Валидация способа доставки
+            if (!formData.get('delivery-type')) {
+                document.getElementById('deliveryError').style.display = 'block';
+                hasErrors = true;
+            }
+
+            // Валидация адреса при выборе доставки
+            if (formData.get('delivery-type') === 'delivery' && !formData.get('address').trim()) {
+                document.getElementById('addressError').style.display = 'block';
+                hasErrors = true;
+            }
+
+            // Валидация согласия
+            if (!formData.get('agreement')) {
+                document.getElementById('agreementError').style.display = 'block';
+                hasErrors = true;
+            }
+
+            if (!hasErrors) {
+                // Вывод результата
+                orderResult.innerHTML = `
+                    <h3>Заказ успешно оформлен!</h3>
+                    <p><strong>ФИО:</strong> ${formData.get('fullname')}</p>
+                    <p><strong>Email:</strong> ${formData.get('email')}</p>
+                    <p><strong>Телефон:</strong> ${formData.get('phone')}</p>
+                    <p><strong>Размер:</strong> ${formData.get('size')}</p>
+                    <p><strong>Количество:</strong> ${formData.get('quantity')}</p>
+                    <p><strong>Способ доставки:</strong> ${formData.get('delivery-type') === 'delivery' ? 'Доставка курьером' : 'Самовывоз'}</p>
+                    ${formData.get('delivery-type') === 'delivery' ? `<p><strong>Адрес:</strong> ${formData.get('address')}</p>` : ''}
+                `;
+                orderResult.style.display = 'block';
+
+                // Очистка формы
+                form.reset();
+                addressGroup.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

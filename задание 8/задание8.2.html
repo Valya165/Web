@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Календарь</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f5f5f5;
+            margin: 20px;
+        }
+
+        .calendar-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .calendar-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .calendar-controls button {
+            padding: 5px 10px;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .calendar-controls button:hover {
+            background: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .weekend {
+            color: #dc3545;
+        }
+
+        .holiday {
+            background-color: #ffebee;
+            color: #dc3545;
+        }
+
+        .current-day {
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+        }
+
+        .other-month {
+            color: #ccc;
+        }
+
+        @media (max-width: 480px) {
+            th, td {
+                padding: 5px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <div class="calendar-controls">
+                <button onclick="changeMonth(-1)">←</button>
+                <button onclick="changeMonth(1)">→</button>
+            </div>
+            <h2 class="calendar-title" id="calendarTitle"></h2>
+        </div>
+        <table id="calendar">
+            <thead>
+                <tr>
+                    <th>Пн</th>
+                    <th>Вт</th>
+                    <th>Ср</th>
+                    <th>Чт</th>
+                    <th>Пт</th>
+                    <th class="weekend">Сб</th>
+                    <th class="weekend">Вс</th>
+                </tr>
+            </thead>
+            <tbody id="calendarBody"></tbody>
+        </table>
+    </div>
+
+    <script>
+        let currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+
+        // Праздничные дни (месяц, день)
+        const holidays = [
+            { month: 0, day: 1 },  // Новый год
+            { month: 0, day: 7 },  // Рождество
+            { month: 1, day: 23 }, // День защитника Отечества
+            { month: 2, day: 8 },  // Международный женский день
+            { month: 4, day: 1 },  // Праздник Весны и Труда
+            { month: 4, day: 9 },  // День Победы
+            { month: 5, day: 12 }, // День России
+            { month: 10, day: 4 }, // День народного единства
+        ];
+
+        function isHoliday(date) {
+            return holidays.some(holiday => 
+                holiday.month === date.getMonth() && 
+                holiday.day === date.getDate()
+            );
+        }
+
+        function createCalendar(year = currentYear, month = currentMonth) {
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const startDay = firstDay.getDay() || 7; // Преобразуем воскресенье (0) в 7
+            const daysInMonth = lastDay.getDate();
+
+            const monthNames = [
+                'Январь', 'Февраль', 'Март', 'Апрель',
+                'Май', 'Июнь', 'Июль', 'Август',
+                'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+            ];
+
+            document.getElementById('calendarTitle').textContent = 
+                `${monthNames[month]} ${year}`;
+
+            let html = '';
+            let day = 1;
+            let dayCount = 1;
+
+            // Создаем строки календаря
+            while (day <= daysInMonth) {
+                html += '<tr>';
+                
+                // Создаем ячейки для каждого дня недели
+                for (let i = 1; i <= 7; i++) {
+                    if (dayCount < startDay || day > daysInMonth) {
+                        html += '<td></td>';
+                    } else {
+                        const currentDate = new Date(year, month, day);
+                        const isWeekend = i > 5;
+                        const isToday = 
+                            day === new Date().getDate() && 
+                            month === new Date().getMonth() && 
+                            year === new Date().getFullYear();
+                        
+                        let classes = [];
+                        if (isWeekend) classes.push('weekend');
+                        if (isHoliday(currentDate)) classes.push('holiday');
+                        if (isToday) classes.push('current-day');
+
+                        html += `<td class="${classes.join(' ')}">${day}</td>`;
+                        day++;
+                    }
+                    dayCount++;
+                }
+                html += '</tr>';
+            }
+
+            document.getElementById('calendarBody').innerHTML = html;
+        }
+
+        function changeMonth(delta) {
+            currentMonth += delta;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            } else if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            createCalendar(currentYear, currentMonth);
+        }
+
+        // Инициализация календаря
+        createCalendar();
+    </script>
+</body>
+</html>

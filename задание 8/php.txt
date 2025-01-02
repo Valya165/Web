@@ -1,0 +1,19 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Получение данных из формы
+    $fullname = htmlspecialchars($_POST['fullname']);
+    $username = htmlspecialchars($_POST['username']);
+    $password = htmlspecialchars($_POST['password']);
+    $dob = htmlspecialchars($_POST['dob']);
+
+    // Здесь можно добавить код для сохранения данных в базу данных
+    // Например, подключение к базе данных и выполнение SQL-запроса
+
+    echo "Регистрация прошла успешно!<br>";
+    echo "ФИО: $fullname<br>";
+    echo "Логин: $username<br>";
+    echo "Дата рождения: $dob<br>";
+} else {
+    echo "Ошибка: форма не была отправлена.";
+}
+?>

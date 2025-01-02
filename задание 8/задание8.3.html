@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+</head>
+<body>
+    <h1>Форма регистрации</h1>
+    <form action="process_registration.php" method="POST">
+        <label for="fullname">ФИО:</label>
+        <input type="text" id="fullname" name="fullname" required><br><br>
+
+        <label for="username">Логин:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="dob">Дата рождения:</label>
+        <input type="date" id="dob" name="dob" required><br><br>
+
+        <input type="submit" value="Зарегистрироваться">
+    </form>
+</body>
+</html>

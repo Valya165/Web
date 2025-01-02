@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблица умножения</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        .multiplication-table {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        tr:first-child th {
+            background-color: #e9ecef;
+        }
+
+        th:first-child {
+            background-color: #e9ecef;
+        }
+
+        td:hover {
+            background-color: #f8f9fa;
+            transition: background-color 0.3s;
+        }
+
+        @media (max-width: 600px) {
+            td, th {
+                padding: 8px;
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="multiplication-table">
+        <table>
+            <script>
+                // Создаем заголовок таблицы
+                document.write('<tr><th>&times;</th>');
+                for (let i = 0; i <= 10; i++) {
+                    document.write(`<th>${i}</th>`);
+                }
+                document.write('</tr>');
+
+                // Создаем строки таблицы
+                for (let i = 0; i <= 10; i++) {
+                    document.write('<tr>');
+                    document.write(`<th>${i}</th>`);
+                    for (let j = 0; j <= 10; j++) {
+                        document.write(`<td>${i * j}</td>`);
+                    }
+                    document.write('</tr>');
+                }
+            </script>
+        </table>
+    </div>
+</body>
+</html>

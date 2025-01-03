@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Регистрация/Авторизация пользователя</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Авторизация</h2>
+        <form action="myLogIn.php" method="post">
+            <label for="loginUsername">Имя пользователя:</label>
+            <input type="text" id="loginUsername" name="loginUsername" required>
+            <label for="loginPassword">Пароль:</label>
+            <input type="password" id="loginPassword" name="loginPassword" required>
+            <button type="submit">Войти</button>
+        </form>
+        <h2>Регистрация</h2>
+        <form action="registration.php" method="post" onsubmit="return normPassword()">
+            <label for="tel">Контактный телефон:</label>
+            <input type="text" id="tel" name="tel" required>
+            <label for="username">Имя пользователя:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit" onclick="normPassword()">Зарегистрироваться</button>
+        </form>
+    </div>
+    <script>
+        function normPassword() {
+            var password = document.getElementById('password').value;
+            if (password.length < 5) {
+                alert("Пароль должен содержать не менее 5 символов");
+                return false;
+            }
+            var phone= document.getElementById('tel').value;
+            var str = /^8\d{10}$/;
+            if(!str.test(phone)){alert("Введите корректный телефон в формате: 88005553535");return false;}
+            return true;
+        }
+    </script>
+</body>
+
+</html>

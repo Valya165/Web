@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История Python</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @font-face {
+            font-family: 'CustomHeader';
+            src: url('fonts/Roboto-Bold.ttf') format('truetype');
+        }
+    </style>
+</head>
+<body>
+    <!-- Содержание -->
+    <nav class="contents">
+        <h2>Содержание:</h2>
+        <ul>
+            <li><a href="#history">История создания Python</a></li>
+            <li><a href="#overview">Обзор языка</a></li>
+            <li><a href="#examples">Примеры кода</a></li>
+        </ul>
+    </nav>
+
+    <!-- История создания -->
+    <section id="history">
+        <h1>История создания Python</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Guido_van_Rossum_OSCON_2006.jpg/274px-Guido_van_Rossum_OSCON_2006.jpg" 
+             alt="Гвидо ван Россум" 
+             class="float-left">
+        
+        <p>Python был создан в 1991 году Гвидо ван Россумом в центре математики и информатики в Нидерландах. Язык был задуман как преемник языка ABC, способного к обработке исключений и взаимодействию с операционной системой Amoeba.</p>
+
+        <p>Название языка произошло вовсе не от вида пресмыкающихся. Автор назвал язык в честь популярного британского комедийного телешоу 1970-х «Летающий цирк Монти Пайтона».</p>
+
+        <p>В 1994 году вышел Python 1.0. В состав версии 1.0 вошли функциональные программные инструменты lambda, map, filter и reduce. Ван Россум описал философию ядра языка в документе «Руководство по стилю кода Python» (Python Style Guide), позже названном PEP 8.</p>
+
+        <h3>Философия Python</h3>
+        <p>Тим Петерс сформулировал 19 принципов философии Python в документе «Дзен Python» (PEP 20). Вот некоторые из них:</p>
+        <ul>
+            <li>Красивое лучше, чем уродливое</li>
+            <li>Явное лучше, чем неявное</li>
+            <li>Простое лучше, чем сложное</li>
+            <li>Сложное лучше, чем запутанное</li>
+            <li>Читаемость имеет значение</li>
+        </ul>
+
+        <h3>Версии и развитие</h3>
+        <p>Ключевые моменты в развитии языка:</p>
+        <ol>
+            <li>Python 2.0 (2000)
+                <ul>
+                    <li>Введение сборщика мусора</li>
+                    <li>Поддержка Юникода</li>
+                    <li>Понимание списков (list comprehension)</li>
+                </ul>
+            </li>
+            <li>Python 3.0 (2008)
+                <ul>
+                    <li>Несовместимые изменения с Python 2</li>
+                    <li>Улучшенная поддержка Юникода</li>
+                    <li>Изменение синтаксиса print</li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+
+    <!-- Обзор языка -->
+    <section id="overview">
+        <h1>Обзор языка Python</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/800px-Python-logo-notext.svg.png" 
+             alt="Python Logo" 
+             class="center-img">
+        
+        <h3>Основные характеристики</h3>
+        <p>Python — высокоуровневый язык программирования общего назначения с следующими ключевыми особенностями:</p>
+        <ul class="custom-bullets">
+            <li>Динамическая типизация</li>
+            <li>Автоматическое управление памятью</li>
+            <li>Полная интроспекция</li>
+            <li>Механизм обработки исключений</li>
+            <li>Поддержка многопоточных вычислений</li>
+            <li>Высокоуровневые структуры данных</li>
+        </ul>
+
+        <h3>Применение</h3>
+        <p>Python широко используется в различных сферах:</p>
+        <table class="features-table">
+            <thead>
+                <tr>
+                    <th>Область применения</th>
+                    <th>Примеры использования</th>
+                    <th>Популярные библиотеки</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Веб-разработка</td>
+                    <td>Django, Flask</td>
+                    <td>Requests, BeautifulSoup</td>
+                </tr>
+                <tr>
+                    <td>Научные вычисления</td>
+                    <td>NumPy, SciPy</td>
+                    <td>Pandas, Matplotlib</td>
+                </tr>
+                <tr>
+                    <td>Машинное обучение</td>
+                    <td>TensorFlow, PyTorch</td>
+                    <td>Scikit-learn, Keras</td>
+                </tr>
+                <tr>
+                    <td>Автоматизация</td>
+                    <td>Скрипты, боты</td>
+                    <td>Paramiko, Fabric</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Синтаксические особенности</h3>
+        <p>Python отличается следующими синтаксическими особенностями:</p>
+        <ul>
+            <li>Отступы определяют вложенность блоков кода</li>
+            <li>Динамическая типизация переменных</li>
+            <li>Объектно-ориентированное программирование</li>
+            <li>Функциональное программирование</li>
+            <li>Обширная стандартная библиотека</li>
+        </ul>
+    </section>
+
+    <!-- Примеры кода -->
+    <section id="examples">
+        <h1>Примеры кода</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/486px-Python_logo_and_wordmark.svg.png" 
+             alt="Python Logo and Wordmark" 
+             class="float-right">
+
+        <h3>Базовые конструкции</h3>
+        <pre class="code-block">
+            <code>
+# Пример функции
+def greeting(name):
+    """Простая функция приветствия"""
+    return f"Привет, {name}!"
+
+# Работа со списками
+numbers = [1, 2, 3, 4, 5]
+squares = [x**2 for x in numbers]  # Списковое включение
+
+# Классы в Python
+class Animal:
+    def __init__(self, name):
+        self.name = name
+    
+    def speak(self):
+        pass
+
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} говорит Гав!"
+
+# Использование
+dog = Dog("Бобик")
+print(dog.speak())  # Выведет: Бобик говорит Гав!
+            </code>
+        </pre>
+
+        <h3>Работа с данными</h3>
+        <pre class="code-block">
+            <code>
+# Работа со словарями
+person = {
+    "name": "Иван",
+    "age": 25,
+    "city": "Москва"
+}
+
+# Обработка исключений
+try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print("Деление на ноль!")
+finally:
+    print("Завершение операции")
+            </code>
+        </pre>
+    </section>
+
+    <!-- Список использованных тегов и свойств -->
+    <footer>
+        <h2>Использованные теги и свойства</h2>
+        <div class="used-elements">
+            <div class="tags">
+                <h3>HTML теги:</h3>
+                <ul>
+                    <li>html</li>
+                    <li>head</li>
+                    <li>body</li>
+                    <li>meta</li>
+                    <li>title</li>
+                    <li>link</li>
+                    <li>style</li>
+                    <li>nav</li>
+                    <li>section</li>
+                    <li>h1-h3</li>
+                    <li>p</li>
+                    <li>ul</li>
+                    <li>ol</li>
+                    <li>li</li>
+                    <li>img</li>
+                    <li>table</li>
+                    <li>tr</li>
+                    <li>th</li>
+                    <li>td</li>
+                    <li>pre</li>
+                    <li>code</li>
+                    <li>div</li>
+                    <li>footer</li>
+                </ul>
+            </div>
+            <div class="properties">
+                <h3>CSS свойства:</h3>
+                <ul>
+                    <li>font-family</li>
+                    <li>font-size</li>
+                    <li>color</li>
+                    <li>background-color</li>
+                    <li>margin</li>
+                    <li>padding</li>
+                    <li>border</li>
+                    <li>border-radius</li>
+                    <li>display</li>
+                    <li>float</li>
+                    <li>width</li>
+                    <li>max-width</li>
+                    <li>height</li>
+                    <li>text-align</li>
+                    <li>text-decoration</li>
+                    <li>line-height</li>
+                    <li>list-style-type</li>
+                    <li>list-style-image</li>
+                    <li>position</li>
+                    <li>top</li>
+                    <li>bottom</li>
+                    <li>left</li>
+                    <li>right</li>
+                    <li>z-index</li>
+                    <li>overflow</li>
+                    <li>transition</li>
+                    <li>box-sizing</li>
+                    <li>flex</li>
+                    <li>justify-content</li>
+                    <li>align-items</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
